@@ -1,2 +1,2 @@
 # movies
-mern stack movies app
+Full Stack stack movies app

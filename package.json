@@ -1,0 +1,25 @@
+{
+  "name": "movies",
+  "version": "1.0.0",
+  "description": "Full Stack movies app",
+  "main": "index.js",
+  "scripts": {
+    "server": "cd server && npm start",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devali00222/movies.git"
+  },
+  "author": "devali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devali00222/movies/issues"
+  },
+  "homepage": "https://github.com/devali00222/movies#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
