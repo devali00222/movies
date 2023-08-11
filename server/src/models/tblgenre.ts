@@ -14,7 +14,7 @@ export interface TblGenreInstance
 
 // schema creation
 export const tblGenre = sequelize.define<TblGenreInstance>(
-  "tblgenre",
+  "tblGenre",
   {
     id: {
       allowNull: false,

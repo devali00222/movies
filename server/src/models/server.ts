@@ -38,8 +38,7 @@ class Server {
     this.app.listen(this.port, () => {
       console.log(`Server is running on http://localhost:${this.port}`);
     });
-    this.db
-      .authenticate()
+    this.db.authenticate()
       .then(() =>
         console.log("Database connection has been established successfully.")
       )
