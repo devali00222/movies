@@ -1,18 +1,19 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/sequelize";
-import { tblCrewModle } from "./tblCrew";
+import { tblDirector } from "./tblDirector";
 import { tblGenre } from "./tblgenre";
+import { tblQualifier } from "./tblQualifier";
 
 interface TblMovieAttributes {
   id: number;
   title: string;
-  releaseDate: Date;
-  genre: number | null;
-  plotSummary: string | null;
-  runtime: number | null;
-  language: string | null;
-  director: number | null;
   rating: number | null;
+  imdbVotes: number | null;
+  year: number | null;
+  genre: number | null;
+  director: number | null;
+  imdb: number | null;
+  qualifier: number | null;
 }
 
 type TblMovieCreationAttributes = Optional<TblMovieAttributes, "id">;
@@ -34,41 +35,45 @@ export const tblMovieModel = sequelize.define<TblMovieInstance>(
       type: DataTypes.STRING(200),
       allowNull: false,
     },
-    releaseDate: {
-      type: DataTypes.DATE,
+    rating: {
+      type: DataTypes.DECIMAL(3, 1),
+      allowNull: true,
+    },
+    imdbVotes: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    year: {
+      type: DataTypes.INTEGER(),
       allowNull: true,
     },
     genre: {
       type: DataTypes.BIGINT,
       allowNull: true,
-      references : {
+      references: {
         model: tblGenre,
-        key: "id"
-      }
-    },
-    plotSummary: {
-      type: DataTypes.STRING(250),
-      allowNull: true,
-    },
-    runtime: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    language: {
-      type: DataTypes.STRING(2),
-      allowNull: true,
+        key: "id",
+      },
     },
     director: {
       type: DataTypes.BIGINT,
       allowNull: true,
-      references:{
-        model:tblCrewModle,
-        key: "id"
-      }
+      references: {
+        model: tblDirector,
+        key: "id",
+      },
     },
-    rating: {
+    imdb: {
       type: DataTypes.DECIMAL(2, 1),
       allowNull: true,
+    },
+    qualifier: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
+      references: {
+        model: tblQualifier,
+        key: "id",
+      },
     },
   },
   {

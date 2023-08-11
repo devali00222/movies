@@ -9,4 +9,3 @@ export const sequelize = new Sequelize(
   password,
   databaseConfigOptions
 );
-

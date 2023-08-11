@@ -6,6 +6,5 @@ dotenv.config({
   path: "../config/.env",
 });
 
-
 const server = new Server();
 server.start();
