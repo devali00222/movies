@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import MoviesRepo from "../repositories/movie.repo";
+import MoviesRepo from "../repositories/movies.repo";
 class MoviesController {
   public static async getAllMovies(req: Request, res: Response) {
     const { page, limit } = req.query;
@@ -36,22 +36,24 @@ class MoviesController {
   public static async postMovie(req: Request, res: Response) {
     const {
       title,
-      releaseDate,
-      genre,
-      plotSummary,
-      language,
-      director,
       rating,
+      imdbVotes,
+      year,
+      genre,
+      director,
+      imdb,
+      qualifier
     } = req.body;
     try {
-      const movie = MoviesRepo.postMovie({
+      const movie =await MoviesRepo.postMovie({
         title,
-        releaseDate,
-        genre,
-        plotSummary,
-        language,
-        director,
         rating,
+        imdbVotes,
+        year,
+        genre,
+        director,
+        imdb,
+        qualifier
       });
       res.status(201).json({
         ok: "created",
@@ -68,7 +70,7 @@ class MoviesController {
     const { movieId } = req.params;
     const updateObject = req.body;
     try {
-      const movie = MoviesRepo.updateMovie(updateObject, parseInt(movieId));
+      const movie =await MoviesRepo.updateMovie(updateObject, parseInt(movieId));
       res.status(201).json({
         ok: "created",
       });

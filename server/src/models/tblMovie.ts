@@ -54,6 +54,7 @@ export const tblMovieModel = sequelize.define<TblMovieInstance>(
         model: tblGenre,
         key: "id",
       },
+      onDelete: "SET NULL",
     },
     director: {
       type: DataTypes.BIGINT,
@@ -62,6 +63,7 @@ export const tblMovieModel = sequelize.define<TblMovieInstance>(
         model: tblDirector,
         key: "id",
       },
+      onDelete: "SET NULL",
     },
     imdb: {
       type: DataTypes.DECIMAL(2, 1),
@@ -74,6 +76,7 @@ export const tblMovieModel = sequelize.define<TblMovieInstance>(
         model: tblQualifier,
         key: "id",
       },
+      onDelete: "SET NULL",
     },
   },
   {

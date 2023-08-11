@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { TblGenreInstance } from "../models/tblgenre";
 import { TblMovieInstance } from "../models/tblMovie";
 
 export const Schema = {
@@ -22,6 +23,14 @@ export const Schema = {
       director: Joi.number().allow(null),
       imdb: Joi.number().allow(null),
       qualifier: Joi.number().allow(null),
+    }),
+  },
+  Genres: {
+    create: Joi.object<TblGenreInstance>({
+      name: Joi.string().min(2).required(),
+    }),
+    update: Joi.object<TblGenreInstance>({
+      name: Joi.string().min(2).required(),
     }),
   },
 };

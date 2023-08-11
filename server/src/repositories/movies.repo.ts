@@ -1,6 +1,7 @@
+import { CreateOpject, UpdateOpject } from "../interfaces/moviesInterface";
 import { tblMovieModel } from "../models/tblMovie";
 
-class MovieSRepo {
+class MoviesRepo {
   static async getAllMovies(page: number, limit: number) {
     try {
       const offset = (page - 1) * limit;
@@ -26,7 +27,7 @@ class MovieSRepo {
       throw new Error("Unable to fetch movie from the database.");
     }
   }
-  static async postMovie(createOpject: any) {
+  static async postMovie(createOpject: CreateOpject) {
     try {
       const movie = await tblMovieModel.create(createOpject);
       return movie;
@@ -34,7 +35,7 @@ class MovieSRepo {
       throw new Error("Unable to post movie to the database.");
     }
   }
-  static async updateMovie(updateObject: any, movieId: number) {
+  static async updateMovie(updateObject: UpdateOpject, movieId: number) {
     try {
       const movie = await this.getOneMovie(movieId);
       movie.set(updateObject);
@@ -46,16 +47,15 @@ class MovieSRepo {
   }
   static async deleteMovie(movieId: number) {
     try {
-      const movie = await this.getOneMovie(movieId);
       await tblMovieModel.destroy({
         where: {
           id: movieId,
         },
       });
-      return movie;
+      return;
     } catch (error) {
       throw new Error(`Can't find movie`);
     }
   }
 }
-export default MovieSRepo;
+export default MoviesRepo;

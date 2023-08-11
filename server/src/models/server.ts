@@ -4,6 +4,7 @@ import morgan from "morgan";
 import { Sequelize } from "sequelize";
 import { sequelize } from "../config/sequelize";
 import moviesRouter from "../routes/moviesRoute";
+import genresRoute from "../routes/genresRoute"
 
 class Server {
   private app: Application;
@@ -20,7 +21,7 @@ class Server {
     this.db = sequelize;
     this.apiRoutes = {
       moviesPath: "/api/movies",
-      genrePath: "/api/genre",
+      genrePath: "/api/genres",
       actorPath: "/api/actors",
     };
     this.middlewares();
@@ -33,6 +34,7 @@ class Server {
   }
   private routes() {
     this.app.use(this.apiRoutes.moviesPath, moviesRouter);
+    this.app.use(this.apiRoutes.genrePath,genresRoute)
   }
   public start(): void {
     this.app.listen(this.port, () => {
