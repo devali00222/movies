@@ -27,6 +27,7 @@ class DirectorRepo {
           id: directorId,
         },
       });
+      if(!director) throw new Error(`director with id ${directorId} dosen't exist`)
       return director;
     } catch (error) {
       throw new Error("Unable to fetch directors data");
@@ -56,6 +57,7 @@ class DirectorRepo {
           id: directorId,
         },
       });
+      if(director[0] === 0) throw new Error(`genre with this id ${directorId} dosen't exist`)
       return;
     } catch (error) {
       throw new Error("Unable to fetch directors data");
@@ -71,6 +73,7 @@ class DirectorRepo {
           id: directorId,
         },
       });
+      if(director === 0) throw new Error(`genre with this id ${directorId} dosen't exist`)
       return;
     } catch (error) {
       throw new Error("Unable to fetch directors data");

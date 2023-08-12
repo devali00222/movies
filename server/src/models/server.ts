@@ -6,6 +6,7 @@ import { sequelize } from "../config/sequelize";
 import moviesRouter from "../routes/moviesRoute";
 import genresRoute from "../routes/genresRoute";
 import directorRoute from "../routes/directorsRoute";
+import qualifierRoute from "../routes/qualifiersRoute";
 
 class Server {
   private app: Application;
@@ -15,6 +16,7 @@ class Server {
     moviesPath: string;
     genrePath: string;
     directorPath: string;
+    qualifierPath: string;
   };
   constructor() {
     this.app = express();
@@ -24,6 +26,7 @@ class Server {
       moviesPath: "/api/movies",
       genrePath: "/api/genres",
       directorPath: "/api/directors",
+      qualifierPath: "/api/qualifiers",
     };
     this.middlewares();
     this.routes();
@@ -37,6 +40,7 @@ class Server {
     this.app.use(this.apiRoutes.moviesPath, moviesRouter);
     this.app.use(this.apiRoutes.genrePath, genresRoute);
     this.app.use(this.apiRoutes.directorPath, directorRoute);
+    this.app.use(this.apiRoutes.qualifierPath, qualifierRoute);
   }
   public start(): void {
     this.app.listen(this.port, () => {

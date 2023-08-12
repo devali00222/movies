@@ -16,11 +16,12 @@ class GenreRepo {
   }
   public static async getOneGenre(genreId: number) {
     try {
-      const genre = await tblGenre.findAll({
+      const genre = await tblGenre.findOne({
         where: {
           id: genreId,
         },
       });
+      if(!genre) throw new Error(`genre with id ${genreId} dosen't exist`)
       return genre;
     } catch (error) {
       throw new Error("Unable to fetch movies from the database.");
@@ -39,18 +40,20 @@ class GenreRepo {
       const genre = await tblGenre.update(updateOpject, {
         where: { id: genreId },
       });
-      return genre;
+      if(genre[0] === 0) throw new Error(`genre with this id ${genreId} dosen't exist`)
+      return;
     } catch (error) {
       throw new Error("Unable to fetch movies from the database.");
     }
   }
   public static async deleteGenre(genreId: number) {
     try {
-      await tblGenre.destroy({
+      const genre = await tblGenre.destroy({
         where: {
           id: genreId,
         },
       });
+      if(genre === 0) throw new Error(`genre with this id ${genreId} dosen't exist`)
       return;
     } catch (error) {
       throw new Error("Unable to fetch movies from the database.");

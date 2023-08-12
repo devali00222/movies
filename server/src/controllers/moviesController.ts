@@ -9,12 +9,10 @@ class MoviesController {
         parseInt(limit as string, 10) || 10
       );
       res.status(200).json({
-        ok: "true",
         movies,
       });
     } catch (error) {
       res.status(500).json({
-        ok: false,
         error,
       });
     }
@@ -28,24 +26,15 @@ class MoviesController {
       });
     } catch (error) {
       res.status(500).json({
-        ok: false,
-        msg: error,
+        error,
       });
     }
   }
   public static async postMovie(req: Request, res: Response) {
-    const {
-      title,
-      rating,
-      imdbVotes,
-      year,
-      genre,
-      director,
-      imdb,
-      qualifier
-    } = req.body;
+    const { title, rating, imdbVotes, year, genre, director, imdb, qualifier } =
+      req.body;
     try {
-      const movie =await MoviesRepo.postMovie({
+      const movie = await MoviesRepo.postMovie({
         title,
         rating,
         imdbVotes,
@@ -53,15 +42,14 @@ class MoviesController {
         genre,
         director,
         imdb,
-        qualifier
+        qualifier,
       });
       res.status(201).json({
-        ok: "created",
+        status: "created",
         movie,
       });
     } catch (error) {
       res.status(500).json({
-        ok: false,
         msg: error,
       });
     }
@@ -70,14 +58,16 @@ class MoviesController {
     const { movieId } = req.params;
     const updateObject = req.body;
     try {
-      const movie =await MoviesRepo.updateMovie(updateObject, parseInt(movieId));
+      await MoviesRepo.updateMovie(
+        updateObject,
+        parseInt(movieId as string, 10)
+      );
       res.status(201).json({
-        ok: "created",
+        status: "updated",
       });
     } catch (error) {
       res.status(500).json({
-        ok: false,
-        msg: error,
+        error: error,
       });
     }
   }
@@ -85,12 +75,12 @@ class MoviesController {
     const { movieId } = req.params;
     try {
       await MoviesRepo.deleteMovie(parseInt(movieId));
+      
       res.status(201).json({
-        ok: "deleted",
+        status: "deleted",
       });
     } catch (error) {
       res.status(500).json({
-        ok: false,
         error,
       });
     }

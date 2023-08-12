@@ -37,21 +37,28 @@ class MoviesRepo {
   }
   static async updateMovie(updateObject: UpdateOpject, movieId: number) {
     try {
-      const movie = await this.getOneMovie(movieId);
-      movie.set(updateObject);
-      await movie.save();
-      return movie;
+      const movie = await tblMovieModel.update(updateObject, {
+        where: {
+          id: movieId,
+        },
+      });
+      if (movie[0] === 0)
+        throw new Error(`genre with this id ${movieId} dosen't exist`);
+      return;
     } catch (error) {
       throw new Error("Unable to updateMovie");
     }
   }
   static async deleteMovie(movieId: number) {
     try {
-      await tblMovieModel.destroy({
+      const movie = await tblMovieModel.destroy({
         where: {
           id: movieId,
         },
       });
+
+      if (movie === 0)
+        throw new Error(`genre with this id ${movieId} dosen't exist`);
       return;
     } catch (error) {
       throw new Error(`Can't find movie`);
