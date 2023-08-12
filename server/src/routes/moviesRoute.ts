@@ -21,4 +21,4 @@ router
   )
   .delete(Validate.validateId, MovieController.deleteMovie);
 
-export default router;
+export default router ;

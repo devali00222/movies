@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { TblDirectorInstance } from "../models/tblDirector";
 import { TblGenreInstance } from "../models/tblgenre";
 import { TblMovieInstance } from "../models/tblMovie";
 
@@ -33,4 +34,12 @@ export const Schema = {
       name: Joi.string().min(2).required(),
     }),
   },
+  Directors: {
+    create: Joi.object<TblDirectorInstance>({
+      name: Joi.string().min(2).required(),
+    }),
+    update: Joi.object<TblDirectorInstance>({
+      name: Joi.string().min(2).required(),
+    })
+  }
 };

@@ -4,7 +4,8 @@ import morgan from "morgan";
 import { Sequelize } from "sequelize";
 import { sequelize } from "../config/sequelize";
 import moviesRouter from "../routes/moviesRoute";
-import genresRoute from "../routes/genresRoute"
+import genresRoute from "../routes/genresRoute";
+import directorRoute from "../routes/directorsRoute";
 
 class Server {
   private app: Application;
@@ -13,7 +14,7 @@ class Server {
   private apiRoutes: {
     moviesPath: string;
     genrePath: string;
-    actorPath: string;
+    directorPath: string;
   };
   constructor() {
     this.app = express();
@@ -22,7 +23,7 @@ class Server {
     this.apiRoutes = {
       moviesPath: "/api/movies",
       genrePath: "/api/genres",
-      actorPath: "/api/actors",
+      directorPath: "/api/directors",
     };
     this.middlewares();
     this.routes();
@@ -34,13 +35,15 @@ class Server {
   }
   private routes() {
     this.app.use(this.apiRoutes.moviesPath, moviesRouter);
-    this.app.use(this.apiRoutes.genrePath,genresRoute)
+    this.app.use(this.apiRoutes.genrePath, genresRoute);
+    this.app.use(this.apiRoutes.directorPath, directorRoute);
   }
   public start(): void {
     this.app.listen(this.port, () => {
       console.log(`Server is running on http://localhost:${this.port}`);
     });
-    this.db.authenticate()
+    this.db
+      .authenticate()
       .then(() =>
         console.log("Database connection has been established successfully.")
       )
