@@ -1,8 +1,8 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/sequelize";
-import { tblDirector } from "./tblDirector";
-import { tblGenre } from "./tblgenre";
-import { tblQualifier } from "./tblQualifier";
+import { tbldirector } from "./tbldirector";
+import { tblgenre } from "./tblgenre";
+import { tblqualifier } from "./tblqualifier";
 
 interface TblMovieAttributes {
   id: number;
@@ -10,10 +10,10 @@ interface TblMovieAttributes {
   rating: number | null;
   imdbVotes: number | null;
   year: number | null;
-  genre: number | null;
-  director: number | null;
+  genreId: number | null;
+  directorId: number | null;
   imdb: number | null;
-  qualifier: number | null;
+  qualifierId: number | null;
 }
 
 type TblMovieCreationAttributes = Optional<TblMovieAttributes, "id">;
@@ -23,7 +23,7 @@ export interface TblMovieInstance
     TblMovieAttributes {}
 
 export const tblMovieModel = sequelize.define<TblMovieInstance>(
-  "tblMovie",
+  "tblmovie",
   {
     id: {
       allowNull: false,
@@ -47,35 +47,38 @@ export const tblMovieModel = sequelize.define<TblMovieInstance>(
       type: DataTypes.INTEGER(),
       allowNull: true,
     },
-    genre: {
+    genreId: {
       type: DataTypes.BIGINT,
       allowNull: true,
       references: {
-        model: tblGenre,
+        model: "tblgenre",
         key: "id",
       },
+      onUpdate: "CASCADE",
       onDelete: "SET NULL",
     },
-    director: {
+    directorId: {
       type: DataTypes.BIGINT,
       allowNull: true,
       references: {
-        model: tblDirector,
+        model: "tbldirector",
         key: "id",
       },
+      onUpdate: "CASCADE",
       onDelete: "SET NULL",
     },
     imdb: {
       type: DataTypes.DECIMAL(2, 1),
       allowNull: true,
     },
-    qualifier: {
+    qualifierId: {
       type: DataTypes.BIGINT,
       allowNull: true,
       references: {
-        model: tblQualifier,
+        model: "tblqualifier",
         key: "id",
       },
+      onUpdate: "CASCADE",
       onDelete: "SET NULL",
     },
   },

@@ -1,5 +1,5 @@
 import { CreateOpject, UpdateOpject } from "../interfaces/directorsinterface";
-import { tblDirector } from "../models/tblDirector";
+import { tbldirector } from "../models/tbldirector";
 
 class DirectorRepo {
   /**
@@ -8,7 +8,7 @@ class DirectorRepo {
   public static async getAllDirectors(page: number, limit: number) {
     const offset = (page - 1) * limit;
     try {
-      const directors = await tblDirector.findAll({
+      const directors = await tbldirector.findAll({
         offset,
         limit,
       });
@@ -22,12 +22,11 @@ class DirectorRepo {
    */
   public static async getOneDirector(directorId: number) {
     try {
-      const director = await tblDirector.findOne({
+      const director = await tbldirector.findOne({
         where: {
           id: directorId,
         },
       });
-      if(!director) throw new Error(`director with id ${directorId} dosen't exist`)
       return director;
     } catch (error) {
       throw new Error("Unable to fetch directors data");
@@ -38,7 +37,7 @@ class DirectorRepo {
    */
   public static async postDirector(createOpject: CreateOpject) {
     try {
-      const director = await tblDirector.create(createOpject);
+      const director = await tbldirector.create(createOpject);
       return director;
     } catch (error) {
       throw new Error("Unable to fetch directors data");
@@ -52,13 +51,12 @@ class DirectorRepo {
     directorId: number
   ) {
     try {
-      const director = await tblDirector.update(updateOpject, {
+      const director = await tbldirector.update(updateOpject, {
         where: {
           id: directorId,
         },
       });
-      if(director[0] === 0) throw new Error(`genre with this id ${directorId} dosen't exist`)
-      return;
+      return director;
     } catch (error) {
       throw new Error("Unable to fetch directors data");
     }
@@ -68,13 +66,12 @@ class DirectorRepo {
    */
   public static async deleteDirector(directorId: number) {
     try {
-      const director = await tblDirector.destroy({
+      const director = await tbldirector.destroy({
         where: {
           id: directorId,
         },
       });
-      if(director === 0) throw new Error(`genre with this id ${directorId} dosen't exist`)
-      return;
+      return director;
     } catch (error) {
       throw new Error("Unable to fetch directors data");
     }

@@ -1,6 +1,6 @@
 export interface CreateOpject {
-  name: string;
+  director: string;
 }
 export interface UpdateOpject {
-  name: string;
+  director: string;
 }

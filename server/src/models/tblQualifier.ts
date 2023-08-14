@@ -3,7 +3,7 @@ import { sequelize } from "../config/sequelize";
 
 interface TblQualifierAttributes {
   id: number;
-  name: string;
+  qualifier: string;
 }
 
 type TblQualifierCreationAttributes = Optional<TblQualifierAttributes, "id">;
@@ -11,8 +11,8 @@ export interface TblQualifierInstance
   extends Model<TblQualifierAttributes, TblQualifierCreationAttributes>,
     TblQualifierAttributes {}
 
-export const tblQualifier = sequelize.define<TblQualifierInstance>(
-  "tblQualifier",
+export const tblqualifier = sequelize.define<TblQualifierInstance>(
+  "tblqualifier",
   {
     id: {
       allowNull: false,
@@ -20,7 +20,7 @@ export const tblQualifier = sequelize.define<TblQualifierInstance>(
       autoIncrement: true,
       type: DataTypes.BIGINT,
     },
-    name: {
+    qualifier: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },

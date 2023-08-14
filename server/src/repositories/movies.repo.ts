@@ -1,16 +1,21 @@
 import { CreateOpject, UpdateOpject } from "../interfaces/moviesInterface";
-import { tblMovieModel } from "../models/tblMovie";
+import { tbldirector } from "../models/tbldirector";
+import { tblgenre } from "../models/tblgenre";
+import { tblMovieModel } from "../models/tblmovie";
+import { tblqualifier } from "../models/tblqualifier";
 
 class MoviesRepo {
   static async getAllMovies(page: number, limit: number) {
     try {
       const offset = (page - 1) * limit;
       const movies = await tblMovieModel.findAll({
-        offset,
         limit,
+        offset,
+        include: [{ model: tblgenre }],
       });
       return movies;
     } catch (error) {
+      console.log(error);
       throw new Error("Unable to fetch movies from the database.");
     }
   }
@@ -21,7 +26,6 @@ class MoviesRepo {
           id: movieId,
         },
       });
-      if (!movie) throw new Error(`can't find movie with id ${movieId}`);
       return movie;
     } catch (error) {
       throw new Error("Unable to fetch movie from the database.");
@@ -42,9 +46,7 @@ class MoviesRepo {
           id: movieId,
         },
       });
-      if (movie[0] === 0)
-        throw new Error(`genre with this id ${movieId} dosen't exist`);
-      return;
+      return movie;
     } catch (error) {
       throw new Error("Unable to updateMovie");
     }
@@ -57,9 +59,7 @@ class MoviesRepo {
         },
       });
 
-      if (movie === 0)
-        throw new Error(`genre with this id ${movieId} dosen't exist`);
-      return;
+      return movie;
     } catch (error) {
       throw new Error(`Can't find movie`);
     }

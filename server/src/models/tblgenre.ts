@@ -1,11 +1,11 @@
 // main imports
-import { DataType, DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/sequelize";
 
 // interface for schema
 interface TblGenreAttributes {
   id: number;
-  name: string;
+  genre: string;
 }
 type TblGenreCreationAttributes = Optional<TblGenreAttributes, "id">;
 export interface TblGenreInstance
@@ -13,8 +13,8 @@ export interface TblGenreInstance
     TblGenreAttributes {}
 
 // schema creation
-export const tblGenre = sequelize.define<TblGenreInstance>(
-  "tblGenre",
+export const tblgenre = sequelize.define<TblGenreInstance>(
+  "tblgenre",
   {
     id: {
       allowNull: false,
@@ -22,7 +22,7 @@ export const tblGenre = sequelize.define<TblGenreInstance>(
       autoIncrement: true,
       type: DataTypes.BIGINT,
     },
-    name: {
+    genre: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },

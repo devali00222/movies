@@ -21,9 +21,13 @@ class MoviesController {
     const { movieId } = req.params;
     try {
       const movie = await MoviesRepo.getOneMovie(parseInt(movieId));
-      res.status(200).json({
-        movie,
-      });
+      if (movie) {
+        res.status(200).json({
+          movie,
+        });
+      } else {
+        res.status(500).json({ error: `can't find movie with id ${movieId}` });
+      }
     } catch (error) {
       res.status(500).json({
         error,
@@ -31,18 +35,26 @@ class MoviesController {
     }
   }
   public static async postMovie(req: Request, res: Response) {
-    const { title, rating, imdbVotes, year, genre, director, imdb, qualifier } =
-      req.body;
+    const {
+      title,
+      rating,
+      imdbVotes,
+      year,
+      genreId,
+      directorId,
+      imdb,
+      qualifierId,
+    } = req.body;
     try {
       const movie = await MoviesRepo.postMovie({
         title,
         rating,
         imdbVotes,
         year,
-        genre,
-        director,
+        genreId,
+        directorId,
         imdb,
-        qualifier,
+        qualifierId,
       });
       res.status(201).json({
         status: "created",
@@ -58,13 +70,24 @@ class MoviesController {
     const { movieId } = req.params;
     const updateObject = req.body;
     try {
-      await MoviesRepo.updateMovie(
-        updateObject,
+      const movie = await MoviesRepo.getOneMovie(
         parseInt(movieId as string, 10)
       );
-      res.status(201).json({
-        status: "updated",
-      });
+      if (movie) {
+        const response = await MoviesRepo.updateMovie(
+          updateObject,
+          parseInt(movieId as string, 10)
+        );
+        if (response[0] === 0) {
+          res.status(500).json({ error: "Unexpected error" });
+        } else {
+          res.status(201).json({
+            status: "updated",
+          });
+        }
+      } else {
+        res.status(500).json({ error: `can't find movie with id ${movieId}` });
+      }
     } catch (error) {
       res.status(500).json({
         error: error,
@@ -74,11 +97,21 @@ class MoviesController {
   public static async deleteMovie(req: Request, res: Response) {
     const { movieId } = req.params;
     try {
-      await MoviesRepo.deleteMovie(parseInt(movieId));
-      
-      res.status(201).json({
-        status: "deleted",
-      });
+      const movie = await MoviesRepo.getOneMovie(
+        parseInt(movieId as string, 10)
+      );
+      if (movie) {
+        const response = await MoviesRepo.deleteMovie(parseInt(movieId));
+        if (response === 0) {
+          res.status(500).json({ error: `Unexpected error` });
+        } else {
+          res.status(201).json({
+            status: "deleted",
+          });
+        }
+      } else {
+        res.status(500).json({ error: `can't find movie with id ${movieId}` });
+      }
     } catch (error) {
       res.status(500).json({
         error,

@@ -20,29 +20,48 @@ class DirectorController {
       const director = await DirectorRepo.getOneDirector(
         parseInt(directorId as string, 10)
       );
-      res.status(200).json({ director });
+      if (director) {
+        res.status(200).json({ director });
+      } else {
+        res
+          .status(500)
+          .json({ error: `director with id ${directorId} dosen't exist` });
+      }
     } catch (error) {
       res.status(500).json({ error });
     }
   }
   public static async postDirector(req: Request, res: Response) {
-    const { name } = req.body;
+    const { director } = req.body;
     try {
-      const director = await DirectorRepo.postDirector({name});
-      res.status(200).json({ director });
+      const response = await DirectorRepo.postDirector({ director });
+      res.status(200).json({ response });
     } catch (error) {
       res.status(500).json({ error });
     }
   }
   public static async updateDirector(req: Request, res: Response) {
     const { directorId } = req.params;
-    const { name } = req.body;
+    const { director } = req.body;
     try {
-      await DirectorRepo.updateDirector(
-        {name},
+      const directorResponse = await DirectorRepo.getOneDirector(
         parseInt(directorId as string, 10)
       );
-      res.status(200).json({ status: "updated" });
+      if (directorResponse) {
+        const response = await DirectorRepo.updateDirector(
+          { director },
+          parseInt(directorId as string, 10)
+        );
+        if (response[0] === 0) {
+          res.status(500).json({ error: "Unexpected error" });
+        } else {
+          res.status(200).json({ status: "updated" });
+        }
+      } else {
+        res
+          .status(500)
+          .json({ error: `director with id ${directorId} dosen't exist` });
+      }
     } catch (error) {
       res.status(500).json({ error });
     }
@@ -50,8 +69,23 @@ class DirectorController {
   public static async deleteDirector(req: Request, res: Response) {
     const { directorId } = req.params;
     try {
-      await DirectorRepo.deleteDirector(parseInt(directorId as string, 10));
-      res.status(200).json({ status: "deleted" });
+      const directorResponse = await DirectorRepo.getOneDirector(
+        parseInt(directorId as string, 10)
+      );
+      if (directorResponse) {
+        const response = await DirectorRepo.deleteDirector(
+          parseInt(directorId as string, 10)
+        );
+        if (response === 0) {
+          res.status(500).json({ error: "Unexpected error" });
+        } else {
+          res.status(200).json({ status: "deleted" });
+        }
+      } else {
+        res
+          .status(500)
+          .json({ error: `director with id ${directorId} dosen't exist` });
+      }
     } catch (error) {
       res.status(500).json({ error });
     }

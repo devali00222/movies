@@ -3,7 +3,7 @@ import { sequelize } from "../config/sequelize";
 
 interface TblDirectorAttributes {
   id: number;
-  name: string;
+  director: string;
 }
 type TblDirectorCreationAttributes = Optional<TblDirectorAttributes, "id">;
 
@@ -11,8 +11,8 @@ export interface TblDirectorInstance
   extends Model<TblDirectorAttributes, TblDirectorCreationAttributes>,
     TblDirectorAttributes {}
 
-export const tblDirector = sequelize.define<TblDirectorInstance>(
-  "tblDirector",
+export const tbldirector = sequelize.define<TblDirectorInstance>(
+  "tbldirector",
   {
     id: {
       allowNull: false,
@@ -20,7 +20,7 @@ export const tblDirector = sequelize.define<TblDirectorInstance>(
       autoIncrement: true,
       type: DataTypes.BIGINT,
     },
-    name: {
+    director: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },

@@ -1,6 +1,6 @@
 export interface CreateOpject {
-  name: string;
+  qualifier: string;
 }
 export interface UpdateOpject {
-  name: string;
+  qualifier: string;
 }

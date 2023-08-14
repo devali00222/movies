@@ -1,6 +1,6 @@
 export interface CreateOpject {
-  name: string;
+  genre: string;
 }
 export interface UpdateOpject {
-  name: string;
+  genre: string;
 }
