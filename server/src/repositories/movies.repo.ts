@@ -1,19 +1,42 @@
+import { QueryTypes } from "sequelize";
+import { sequelize } from "../config/sequelize";
 import { CreateOpject, UpdateOpject } from "../interfaces/moviesInterface";
-import { tbldirector } from "../models/tbldirector";
-import { tblgenre } from "../models/tblgenre";
 import { tblMovieModel } from "../models/tblmovie";
-import { tblqualifier } from "../models/tblqualifier";
+import { getAllMovies, getFiltterdMovies } from "../queries/movieQueries";
 
 class MoviesRepo {
   static async getAllMovies(page: number, limit: number) {
     try {
       const offset = (page - 1) * limit;
-      const movies = await tblMovieModel.findAll({
-        limit,
-        offset,
-        include: [{ model: tblgenre }],
+      const movies = await sequelize.query(getAllMovies(limit, offset), {
+        type: QueryTypes.SELECT,
       });
+
       return movies;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Unable to fetch movies from the database.");
+    }
+  }
+  static async fillterMovies(page: number, limit: number, query?: any) {
+    try {
+      const offset = page && limit ? (page - 1) * limit : 0;
+      const { genre, director, qualifier, year, rating, imdbVotes, imdb, order } =
+        query;
+      const movies = await sequelize.query(getFiltterdMovies(limit, offset), {
+        replacements: {
+          genre: genre || null,
+          qualifier: qualifier || null,
+          director: director || null,
+          year: year || null,
+          rating: rating || null,
+          imdbVotes: imdbVotes || null,
+          imdb: imdb || null,
+          order: order || null
+        },
+        type: QueryTypes.SELECT,
+      });
+      return movies
     } catch (error) {
       console.log(error);
       throw new Error("Unable to fetch movies from the database.");

@@ -2,14 +2,43 @@ import { Request, Response } from "express";
 import MoviesRepo from "../repositories/movies.repo";
 class MoviesController {
   public static async getAllMovies(req: Request, res: Response) {
-    const { page, limit } = req.query;
+    const { page, limit, ...query } = req.query;
+    const parsedPage = parseInt(page as string, 10);
+    const parsedLimit = parseInt(limit as string, 10);
+    const prevPage = parsedPage && parsedPage > 1 ? parsedPage - 1 : null;
+    const NextPage = parsedPage ? parsedPage + 1 : 2;
     try {
-      const movies = await MoviesRepo.getAllMovies(
-        parseInt(page as string, 10) || 1,
-        parseInt(limit as string, 10) || 10
-      );
+      let moviesData;
+      if (Object.keys(query).length === 0) {
+        const movies = await MoviesRepo.getAllMovies(
+          parsedPage || 1,
+          parsedLimit || 10
+        );
+        moviesData = movies;
+      } else {
+        const movies = await MoviesRepo.fillterMovies(
+          parsedPage || 1,
+          parsedLimit || 10,
+          query
+        );
+        moviesData = movies;
+      }
+
+      // response of movies you get
       res.status(200).json({
-        movies,
+        data: moviesData,
+        totalItems: moviesData.length,
+        currentPage: page,
+        itemsPerPage: limit,
+        prevPageLink:
+          prevPage !== null
+            ? `${req.protocol}://${req.get("host")}${req.baseUrl}${
+                req.path
+              }?page=${prevPage}&limit=${limit}`
+            : null,
+        nextPageLink: `${req.protocol}://${req.get("host")}${req.baseUrl}${
+          req.path
+        }?page=${NextPage}&limit=${limit}`,
       });
     } catch (error) {
       res.status(500).json({
