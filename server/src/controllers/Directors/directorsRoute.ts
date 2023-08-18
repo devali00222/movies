@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { Schema } from "../utils/validateSchemas";
-import { Validate } from "../middlewares/validator";
-import DirectorController from "../controllers/directoresController";
+import { Validate } from "../../middlewares/validator";
+import DirectorController from "./directoresController";
+import { Schema } from "./directorsValidator";
 const router = Router();
 
 router

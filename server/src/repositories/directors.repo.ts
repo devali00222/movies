@@ -1,4 +1,4 @@
-import { CreateOpject, UpdateOpject } from "../interfaces/directorsinterface";
+import { CreateOpject, UpdateOpject } from "../controllers/Directors/directorsInterface";
 import { tbldirector } from "../models/tbldirector";
 
 class DirectorRepo {

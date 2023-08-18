@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import QualifiersRepo from "../repositories/qualifiers.repo";
+import QualifiersRepo from "../../repositories/qualifiers.repo";
 
 class QualifiersController {
   /**

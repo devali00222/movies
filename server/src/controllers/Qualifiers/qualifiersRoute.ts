@@ -1,7 +1,7 @@
 import { Router } from "express";
-import QualifiersController from "../controllers/qualifiersController";
-import { Validate } from "../middlewares/validator";
-import { Schema } from "../utils/validateSchemas";
+import QualifiersController from "./qualifiersController";
+import { Validate } from "../../middlewares/validator";
+import { Schema } from "./qualifiersValidator";
 
 const router = Router();
 router

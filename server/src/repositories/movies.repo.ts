@@ -1,8 +1,8 @@
 import { QueryTypes } from "sequelize";
 import { sequelize } from "../config/sequelize";
-import { CreateOpject, UpdateOpject } from "../interfaces/moviesInterface";
+import { CreateOpject, UpdateOpject } from "../controllers/Movies/moviesInterface";
 import { tblMovieModel } from "../models/tblmovie";
-import { getAllMovies, getFiltterdMovies } from "../queries/movieQueries";
+import { getAllMovies, getFiltterdMovies } from "../controllers/Movies/moviesQueries";
 
 class MoviesRepo {
   static async getAllMovies(page: number, limit: number) {

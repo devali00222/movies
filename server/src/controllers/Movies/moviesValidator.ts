@@ -1,9 +1,5 @@
 import Joi from "joi";
-import { TblDirectorInstance } from "../models/tbldirector";
-import { TblGenreInstance } from "../models/tblgenre";
-import { TblMovieInstance } from "../models/tblmovie";
-import { TblQualifierInstance } from "../models/tblqualifier";
-
+import { TblMovieInstance } from "../../models/tblmovie";
 export const Schema = {
   Movies: {
     create: Joi.object<TblMovieInstance>({
@@ -25,30 +21,6 @@ export const Schema = {
       directorId: Joi.number().allow(null),
       imdb: Joi.number().allow(null),
       qualifierId: Joi.number().allow(null),
-    }),
-  },
-  Genres: {
-    create: Joi.object<TblGenreInstance>({
-      genre: Joi.string().min(2).required(),
-    }),
-    update: Joi.object<TblGenreInstance>({
-      genre: Joi.string().min(2).required(),
-    }),
-  },
-  Directors: {
-    create: Joi.object<TblDirectorInstance>({
-      director: Joi.string().min(2).required(),
-    }),
-    update: Joi.object<TblDirectorInstance>({
-      director: Joi.string().min(2).required(),
-    }),
-  },
-  Qualifiers: {
-    create: Joi.object<TblQualifierInstance>({
-      qualifier: Joi.string().min(1).required(),
-    }),
-    update: Joi.object<TblQualifierInstance>({
-      qualifier: Joi.string().min(1).required(),
     }),
   },
 };

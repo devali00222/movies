@@ -1,7 +1,7 @@
 import { Router } from "express";
-import MovieController from "../controllers/moviesController";
-import { Schema } from "../utils/validateSchemas";
-import { Validate } from "../middlewares/validator";
+import MovieController from "./moviesController";
+import { Schema } from "./moviesValidator";
+import { Validate } from "../../middlewares/validator";
 const router = Router();
 
 router
@@ -21,4 +21,4 @@ router
   )
   .delete(Validate.validateId, MovieController.deleteMovie);
 
-export default router ;
+export default router;

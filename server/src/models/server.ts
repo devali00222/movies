@@ -3,10 +3,10 @@ import cors from "cors";
 import morgan from "morgan";
 import { Sequelize } from "sequelize";
 import { sequelize } from "../config/sequelize";
-import moviesRouter from "../routes/moviesRoute";
-import genresRoute from "../routes/genresRoute";
-import directorRoute from "../routes/directorsRoute";
-import qualifierRoute from "../routes/qualifiersRoute";
+import moviesRouter from "../controllers/Movies/moviesRoute";
+import genresRoute from "../controllers/Genres/genresRoute";
+import directorRoute from "../controllers/Directors/directorsRoute";
+import qualifierRoute from "../controllers/Qualifiers/qualifiersRoute";
 
 class Server {
   private app: Application;

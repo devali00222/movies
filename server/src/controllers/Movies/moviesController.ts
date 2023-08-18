@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import MoviesRepo from "../repositories/movies.repo";
+import MoviesRepo from "../../repositories/movies.repo";
 class MoviesController {
   public static async getAllMovies(req: Request, res: Response) {
     const { page, limit, ...query } = req.query;

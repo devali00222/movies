@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import GenreRepo from "../repositories/genre.repo";
+import GenreRepo from "../../repositories/genre.repo";
 
 class GenreController {
   /**

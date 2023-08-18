@@ -1,4 +1,4 @@
-import { CreateOpject, UpdateOpject } from "../interfaces/genresInterface";
+import { CreateOpject, UpdateOpject } from "../controllers/Genres/genresInterface";
 import { tblgenre } from "../models/tblgenre";
 
 class GenreRepo {

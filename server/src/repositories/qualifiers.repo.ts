@@ -1,4 +1,4 @@
-import { CreateOpject, UpdateOpject } from "../interfaces/qualifiersinterface";
+import { CreateOpject, UpdateOpject } from "../controllers/Qualifiers/qualifiersinterface";
 import { tblqualifier } from "../models/tblqualifier";
 class QualifiersRepo {
   /**

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import DirectorRepo from "../repositories/directors.repo";
+import DirectorRepo from "../../repositories/directors.repo";
 
 class DirectorController {
   public static async getAllDirectors(req: Request, res: Response) {
