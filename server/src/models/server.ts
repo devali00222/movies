@@ -7,6 +7,7 @@ import moviesRouter from "../controllers/Movies/moviesRoute";
 import genresRoute from "../controllers/Genres/genresRoute";
 import directorRoute from "../controllers/Directors/directorsRoute";
 import qualifierRoute from "../controllers/Qualifiers/qualifiersRoute";
+import authRoute from "../controllers/Auth/authRoute";
 
 class Server {
   private app: Application;
@@ -17,6 +18,7 @@ class Server {
     genrePath: string;
     directorPath: string;
     qualifierPath: string;
+    authPath: string;
   };
   constructor() {
     this.app = express();
@@ -27,6 +29,7 @@ class Server {
       genrePath: "/api/genres",
       directorPath: "/api/directors",
       qualifierPath: "/api/qualifiers",
+      authPath: "/api/auth",
     };
     this.middlewares();
     this.routes();
@@ -41,6 +44,7 @@ class Server {
     this.app.use(this.apiRoutes.genrePath, genresRoute);
     this.app.use(this.apiRoutes.directorPath, directorRoute);
     this.app.use(this.apiRoutes.qualifierPath, qualifierRoute);
+    this.app.use(this.apiRoutes.authPath, authRoute);
   }
   public start(): void {
     this.app.listen(this.port, () => {

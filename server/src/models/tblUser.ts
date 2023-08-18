@@ -3,9 +3,8 @@ import { sequelize } from "../config/sequelize";
 
 interface TblUserAttributes {
   id: number;
-  username: string;
-  password: string;
   email: string;
+  password: string;
   firstName: string;
   lastName?: string;
 }
@@ -22,11 +21,6 @@ export const tblUser = sequelize.define<TblUserInstance>(
       primaryKey: true,
       autoIncrement: true,
       type: DataTypes.BIGINT,
-    },
-    username: {
-      allowNull: false,
-      unique: true,
-      type: DataTypes.STRING(50),
     },
     password: {
       allowNull: false,

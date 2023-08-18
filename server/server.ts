@@ -2,7 +2,13 @@ import dotenv from "dotenv";
 import { sequelize } from "./src/config/sequelize";
 import Server from "./src/models/server";
 
-
+declare global {
+  namespace Express {
+    interface Request {
+      userId?: number;
+    }
+  }
+}
 dotenv.config({
   path: "../config/.env",
 });
