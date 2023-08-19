@@ -8,6 +8,8 @@ import genresRoute from "../controllers/Genres/genresRoute";
 import directorRoute from "../controllers/Directors/directorsRoute";
 import qualifierRoute from "../controllers/Qualifiers/qualifiersRoute";
 import authRoute from "../controllers/Auth/authRoute";
+import favoritesRoute from "../controllers/Favorites/favoritesRoute";
+import watchListRoute from "../controllers/WatchList/watchListRoute"
 
 class Server {
   private app: Application;
@@ -19,6 +21,8 @@ class Server {
     directorPath: string;
     qualifierPath: string;
     authPath: string;
+    favoritesPath:string;
+    watchListPath: string;
   };
   constructor() {
     this.app = express();
@@ -30,6 +34,8 @@ class Server {
       directorPath: "/api/directors",
       qualifierPath: "/api/qualifiers",
       authPath: "/api/auth",
+      favoritesPath:"/api/favorites",
+      watchListPath:"/api/watchlist"
     };
     this.middlewares();
     this.routes();
@@ -45,6 +51,8 @@ class Server {
     this.app.use(this.apiRoutes.directorPath, directorRoute);
     this.app.use(this.apiRoutes.qualifierPath, qualifierRoute);
     this.app.use(this.apiRoutes.authPath, authRoute);
+    this.app.use(this.apiRoutes.favoritesPath, favoritesRoute)
+    this.app.use(this.apiRoutes.watchListPath, watchListRoute)
   }
   public start(): void {
     this.app.listen(this.port, () => {

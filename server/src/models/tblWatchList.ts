@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/sequelize";
-import { tblMovieModel } from "./tblMovie";
-import { tblUser } from "./tblUser";
+
 
 interface TblWatchListAttributes {
   id: number;
@@ -27,7 +26,7 @@ export const tblWatchList = sequelize.define<TblWatchListInstace>(
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: tblUser,
+        model: "tbluser",
         key: "id",
       },
     },
@@ -35,7 +34,7 @@ export const tblWatchList = sequelize.define<TblWatchListInstace>(
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: tblMovieModel,
+        model: "tblmovie",
         key: "id",
       },
     },

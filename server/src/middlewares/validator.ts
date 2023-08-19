@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import Joi, { ObjectSchema } from "joi";
+import Joi, { ObjectSchema, ValidationError } from "joi";
 
 export class Validate {
   public static validateId(req: Request, res: Response, next: NextFunction) {
