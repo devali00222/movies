@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import Server from "./src/models/server";
+import Server from "./models/server";
 
 declare global {
   namespace Express {

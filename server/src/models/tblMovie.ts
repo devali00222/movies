@@ -1,8 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/sequelize";
-import { tbldirector } from "./tbldirector";
-import { tblgenre } from "./tblgenre";
-import { tblqualifier } from "./tblqualifier";
+
 
 interface TblMovieAttributes {
   id: number;

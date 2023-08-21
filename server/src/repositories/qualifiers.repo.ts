@@ -1,5 +1,5 @@
-import { CreateOpject, UpdateOpject } from "../controllers/Qualifiers/qualifiersinterface";
-import { tblqualifier } from "../models/tblqualifier";
+import { CreateOpject, UpdateOpject } from "../controllers/Qualifiers/qualifiersInterface";
+import { tblqualifier } from "../models/tblQualifier";
 class QualifiersRepo {
   /**
    * getAllQualifiers

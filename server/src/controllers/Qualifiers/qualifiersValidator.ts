@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { TblQualifierInstance } from "../../models/tblqualifier";
+import { TblQualifierInstance } from "../../models/tblQualifier";
 
 export const Schema = {
   Qualifiers: {

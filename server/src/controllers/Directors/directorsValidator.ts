@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { TblDirectorInstance } from "../../models/tbldirector";
+import { TblDirectorInstance } from "../../models/tblDirector";
 
 export const Schema = {
   Directors: {

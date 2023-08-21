@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // The target ECMAScript version
+    "module": "CommonJS", // Specify the module system (CommonJS for Node.js)
+    "outDir": "./dist", // Output directory for transpiled JavaScript files
+    "rootDir": "./src", // Source directory for TypeScript files
+    "esModuleInterop": true, // Enable interop between CommonJS and ES modules
+    "strict": true, // Enable strict type checking
+    "moduleResolution": "node", // Specify module resolution strategy
+    "forceConsistentCasingInFileNames": true, // Ensure consistent file casing
+    "sourceMap": true, // Generate source maps for debugging
+    "noEmitOnError": true
+  },
+  "include": [
+    "src/**/*.ts" // Specify the files to be included for compilation
+  ],
+  "exclude": [
+    "node_modules" // Exclude node_modules directory from compilation
+  ]
+}
