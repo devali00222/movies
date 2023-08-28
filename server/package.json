@@ -5,8 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "build": "tsc",
-    "start": "set NODE_ENV=production&& node ./dist/server.js",
-    "dev": "set NODE_ENV=development&& ts-node ./src/server.ts",
+    "start": "set NODE_ENV=production && node ./dist/server.js",
+    "dev": "set NODE_ENV=development && ts-node ./src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "devali",
@@ -29,6 +29,7 @@
     "@types/jsonwebtoken": "^9.0.2",
     "@types/morgan": "^1.9.4",
     "@types/wait-on": "^5.3.1",
+    "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
     "wait-on": "^7.0.1"
