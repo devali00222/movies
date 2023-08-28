@@ -25,7 +25,7 @@ export const tblFavorites = sequelize.define<TblFavoritesInstace>(
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: "tbluser",
+        model: "tblUser",
         key: "id",
       },
     },

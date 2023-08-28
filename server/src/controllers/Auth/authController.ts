@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import UserRepo from "../../repositories/user.repo";
 import { CreateOpject } from "./authInterface";
+import getConfig from "../../config/config";
 
 class AuthController {
   public static async register(req: Request, res: Response) {
@@ -27,7 +28,7 @@ class AuthController {
     }
     const token = jwt.sign(
       { userId: user.id },
-      (process.env.JWT_PRIVATE_KEY as string) || "12345-67890-09876-54321"
+      (getConfig().secretKey as string) || "12345-67890-09876-54321"
     );
     res.json({
       token,

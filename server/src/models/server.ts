@@ -3,13 +3,15 @@ import cors from "cors";
 import morgan from "morgan";
 import { Sequelize } from "sequelize";
 import { sequelize } from "../config/sequelize";
+import waitOn from "wait-on";
 import moviesRouter from "../controllers/Movies/moviesRoute";
 import genresRoute from "../controllers/Genres/genresRoute";
 import directorRoute from "../controllers/Directors/directorsRoute";
 import qualifierRoute from "../controllers/Qualifiers/qualifiersRoute";
 import authRoute from "../controllers/Auth/authRoute";
 import favoritesRoute from "../controllers/Favorites/favoritesRoute";
-import watchListRoute from "../controllers/WatchList/watchListRoute"
+import watchListRoute from "../controllers/WatchList/watchListRoute";
+import getConfig from "../config/config";
 
 class Server {
   private app: Application;
@@ -21,12 +23,12 @@ class Server {
     directorPath: string;
     qualifierPath: string;
     authPath: string;
-    favoritesPath:string;
+    favoritesPath: string;
     watchListPath: string;
   };
   constructor() {
     this.app = express();
-    this.port = parseInt(process.env.PORT || "3500", 10) | 3500;
+    this.port = parseInt(getConfig().port as string, 10) | 3500;
     this.db = sequelize;
     this.apiRoutes = {
       moviesPath: "/api/movies",
@@ -34,8 +36,8 @@ class Server {
       directorPath: "/api/directors",
       qualifierPath: "/api/qualifiers",
       authPath: "/api/auth",
-      favoritesPath:"/api/favorites",
-      watchListPath:"/api/watchlist"
+      favoritesPath: "/api/favorites",
+      watchListPath: "/api/watchlist",
     };
     this.middlewares();
     this.routes();
@@ -51,21 +53,21 @@ class Server {
     this.app.use(this.apiRoutes.directorPath, directorRoute);
     this.app.use(this.apiRoutes.qualifierPath, qualifierRoute);
     this.app.use(this.apiRoutes.authPath, authRoute);
-    this.app.use(this.apiRoutes.favoritesPath, favoritesRoute)
-    this.app.use(this.apiRoutes.watchListPath, watchListRoute)
+    this.app.use(this.apiRoutes.favoritesPath, favoritesRoute);
+    this.app.use(this.apiRoutes.watchListPath, watchListRoute);
   }
-  public start(): void {
-    this.app.listen(this.port, () => {
-      console.log(`Server is running on http://localhost:${this.port}`);
-    });
-    this.db
-      .authenticate()
-      .then(() =>
-        console.log("Database connection has been established successfully.")
-      )
-      .catch((err) => {
-        console.error("Unable to connect to the database:", err);
+  public async start() {
+    try {
+      await waitOn({ resources: ["tcp:mysql:3306"] });
+      await this.db.authenticate();
+      await sequelize.sync({ alter: true });
+      console.log("Database connection has been established successfully.");
+      this.app.listen(this.port, () => {
+        console.log(`Server is running on http://localhost:${this.port}`);
       });
+    } catch (error) {
+      console.error("Error waiting for the database:", error);
+    }
   }
 }
 export default Server;

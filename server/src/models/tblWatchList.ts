@@ -26,7 +26,7 @@ export const tblWatchList = sequelize.define<TblWatchListInstace>(
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: "tbluser",
+        model: "tblUser",
         key: "id",
       },
     },

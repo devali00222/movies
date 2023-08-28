@@ -9,7 +9,7 @@ declare global {
   }
 }
 dotenv.config({
-  path: "../config/.env",
+  path: "../.env",
 });
 
 const server = new Server();

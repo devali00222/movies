@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/sequelize";
 
-
 interface TblMovieAttributes {
   id: number;
   title: string;
