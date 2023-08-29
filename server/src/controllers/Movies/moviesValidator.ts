@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { TblMovieInstance } from "../../models/tblmovie";
+import { TblMovieInstance } from "../../models/tblMovie";
 export const Schema = {
   Movies: {
     create: Joi.object<TblMovieInstance>({

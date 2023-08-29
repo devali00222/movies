@@ -5,8 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "build": "tsc",
-    "start": "set NODE_ENV=production && node ./dist/server.js",
-    "dev": "set NODE_ENV=development && ts-node ./src/server.ts",
+    "start": "set NODE_ENV=production&& node ./dist/server.js",
+    "dev": "set NODE_ENV=development&& ts-node ./src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "devali",

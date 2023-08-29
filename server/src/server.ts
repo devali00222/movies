@@ -8,9 +8,6 @@ declare global {
     }
   }
 }
-dotenv.config({
-  path: "../.env",
-});
 
 const server = new Server();
 server.start();

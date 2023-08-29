@@ -6,6 +6,6 @@ export const databaseConfigOptions: Options = {
   username: getConfig().dbUser,
   password: getConfig().dbPass,
   host: getConfig().dbHost,
-  port: getConfig().dbPort,
+  port: parseInt(getConfig().dbPort as string ,10),
   dialect: "mysql",
 };

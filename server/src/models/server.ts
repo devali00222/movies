@@ -58,7 +58,7 @@ class Server {
   }
   public async start() {
     try {
-      await waitOn({ resources: ["tcp:mysql:3306"] });
+      if(process.env.NODE_ENV === "production") await waitOn({ resources: ["tcp:mysql:3306"] });
       await this.db.authenticate();
       await sequelize.sync({ alter: true });
       console.log("Database connection has been established successfully.");

@@ -1,7 +1,7 @@
 import { QueryTypes } from "sequelize";
 import { sequelize } from "../config/sequelize";
 import { CreateOpject, UpdateOpject } from "../controllers/Movies/moviesInterface";
-import { tblMovieModel } from "../models/tblmovie";
+import { tblMovieModel } from "../models/tblMovie";
 import { getAllMovies, getFiltterdMovies } from "../controllers/Movies/moviesQueries";
 
 class MoviesRepo {

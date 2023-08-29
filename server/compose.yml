@@ -17,5 +17,7 @@ services:
       - "3500:3500"
     env_file:
       - .env # Path to your .env file
+    environment:
+      - NODE_ENV=production
     depends_on:
       - mysql
