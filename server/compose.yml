@@ -7,10 +7,13 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 01093816720Alieliwa
       MYSQL_DATABASE: movies
+    volumes:
+      - mysql_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 10s
       retries: 10
+    
   app:
     image: app:1.0
     ports:
@@ -21,3 +24,5 @@ services:
       - NODE_ENV=production
     depends_on:
       - mysql
+volumes:
+  mysql_data:

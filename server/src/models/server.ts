@@ -56,12 +56,9 @@ class Server {
     this.app.use(this.apiRoutes.favoritesPath, favoritesRoute);
     this.app.use(this.apiRoutes.watchListPath, watchListRoute);
   }
-  public async start() {
+  public start() {
     try {
-      if(process.env.NODE_ENV === "production") await waitOn({ resources: ["tcp:mysql:3306"] });
-      await this.db.authenticate();
-      await sequelize.sync({ alter: true });
-      console.log("Database connection has been established successfully.");
+      this.db.authenticate().then(() =>console.log("Database connection has been established successfully."))
       this.app.listen(this.port, () => {
         console.log(`Server is running on http://localhost:${this.port}`);
       });
